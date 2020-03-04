@@ -20,16 +20,16 @@ red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 
-gameDisplay = pygame.display.set_mode((800,600))
+gameDisplay = pygame.display.set_mode((300,200))
 gameDisplay.fill(white)
 
-# pygame.draw.rect(gameDisplay, red, (400,400,50,25))
-# pygame.draw.circle(gameDisplay, white, (150,150), 75)
-# pygame.draw.polygon(gameDisplay, green, ((25,75),(76,125),(250,375),(400,25),(60,540)))
-# pygame.draw.line(gameDisplay, blue, (100,200), (300,450),5)
+pygame.draw.rect(gameDisplay, red, (400,400,50,25))
+pygame.draw.circle(gameDisplay, red, (225,50), 5)
+pygame.draw.polygon(gameDisplay, green, ((25,185),(75,185),(100,150),(50,150),(20,120),(75,120)))
+pygame.draw.line(gameDisplay, blue, (100,200), (300,450),5)
 
-pixAr = pygame.PixelArray(gameDisplay)
-pixAr[10][:] = green
+# pixAr = pygame.PixelArray(gameDisplay)
+# pixAr[10][:] = green
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

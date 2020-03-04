@@ -1,8 +1,7 @@
-
-class node:
-    def __init__(cost,parent = null):
-        self.state = 0
+class Node:
+    def __init__(self,state = None,cost = float('inf'),parent= None):
+        self.state = state
         self.parent = parent
-        self.cost = float('inf')
+        self.cost = cost
 
 
