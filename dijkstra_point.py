@@ -7,7 +7,7 @@ import math
 #          Workspace
 ######################################
 def isValidWorkspace(pt,r = 3): #To be modified
-    circle = (pt[0] - math.floor(225/r))**2 + (pt[1]-math.floor(150/r))**2 - math.floor(25/r)**2
+    circle = (pt[0] - math.floor(225/r))**2 + (pt[1]-math.floor(50/r))**2 - math.floor(25/r)**2
     ellipse =((pt[0] - math.floor(150/r))/math.floor(40/r))**2 + ((pt[1]-math.floor(100/r))/math.floor(20/r))**2
     if(circle <= 0 or ellipse<= 1):
         return False
@@ -18,7 +18,7 @@ def isSafe(newState,r=3):
     col = math.floor(300/r)
     row = math.floor(200/r)
 
-    if(newState[0]< 0 or newState[0]>row or newState[1]<0 or newState[1]>col):
+    if(newState[0]< 0 or newState[0]>col or newState[1]<0 or newState[1]>row):
         return False
     return isValidWorkspace(newState,r)
 
@@ -44,10 +44,10 @@ def generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res=
             sol = printPath(currentNode)
             return [True,sol]
         
-        print("=======")
-        print(currentNode.state)
-        print("=======")
-        print("")
+        # print("=======")
+        # print(currentNode.state)
+        # print("=======")
+        # print("")
         for i in range(8): 
             newState = A[i,:] + currentNode.state 
             s = str(newState[0])+str(newState[1])
@@ -74,7 +74,7 @@ if __name__ == "__main__":
     nodesExplored = {}
     q = deque()
     startPosition = np.array([0,0])
-    goalPosition = np.array([200,140])
+    goalPosition = np.array([250,140])
     print(generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,4))
     
 

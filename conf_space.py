@@ -14,7 +14,7 @@ green = (0,255,0)
 blue = (0,0,255)
 
 
-res = 4 #resolution of grid
+res = 3 #resolution of grid
 scale = 3 #scale of grid
 
 size_x = math.ceil(300)
@@ -25,7 +25,7 @@ gameDisplay = pygame.display.set_mode((size_x*scale,size_y*scale))
 #####################################
 #       Display Obstacles
 #####################################
-circlePts = [255,50,25]
+circlePts = [225,50,25]
 
 polygonPts =  np.array([[20,120],[25,185],[75,185],[100,150],[75,120],[50,150],[20,120]])
 polygonPts[:,1] = (size_y - polygonPts[:,1])
