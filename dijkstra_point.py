@@ -4,14 +4,31 @@ import numpy as np
 import math
 
 
-
-# checks whether next action is near an obstacle or ill defined 
-def isSafe(newState):
+######################################
+#          Workspace
+######################################
+def isValidWorkspace(pt,r = 3): #To be modified
+    circle = (pt[0] - math.floor(225/r))**2 + (pt[1]-math.floor(150/r))**2 
+    ellipse = (pt[0] - math.floor(225/r))**2/40**2 + (pt[1]-math.floor(150/r))**2/25**2
+    if(circle <= math.floor(25/r)**2 or ellipse<= 1):
+        return False
     return True
 
 
+# checks whether next action is near an obstacle or ill defined 
+def isSafe(newState,r=3):
+    col = math.floor(300/r)
+    row = math.floor(200/r)
+
+    if(newState[0]< 0 or newState[0]>row or newState[1]<0 or newState[1]>1):
+        return False
+    return isValidWorkspace(newState,3)
+
 def printPath(node):
-    pass
+    current = node
+    while(current):
+       print(current.state)
+       current = current.parent
 
 
 #generates optimal path for robot
@@ -27,7 +44,14 @@ def generatePath(q,visited,A,startPosition,goalPosition,costIncrement,nodesExplo
         if((currentNode.state == goalPosition).all()):
             printPath(currentNode)
             break
-           
+       
+        print("=====================")
+        print(currentNode.state)
+        print(currentNode.parent)
+        # if(currentNode.parent):
+            # print(currentNode.parent.state)
+        print("======================")
+        print(" ")
         for i in range(8): 
             newState = A[i,:] + currentNode.state 
             s = str(newState[0])+str(newState[1])
@@ -40,7 +64,7 @@ def generatePath(q,visited,A,startPosition,goalPosition,costIncrement,nodesExplo
                 q.append(newNode)
 
             else:
-                if(nodesExplored[s].cost > currentNode.cost + costIncrement[i]):
+                if(s in key and nodesExplored[s].cost > currentNode.cost + costIncrement[i]):
                     nodesExplored[s].cost = currentNode.cost + costIncrement[i]
                     nodesExplored[s].parent = currentNode
 
@@ -57,6 +81,7 @@ if __name__ == "__main__":
     q = deque()
     startPosition = np.array([0,0])
     goalPosition = np.array([5,5])
-    generatePath(q,visited,A,startPosition,goalPosition,costIncrement,nodesExplored)
+    print(generatePath(q,visited,A,startPosition,goalPosition,costIncrement,nodesExplored))
+    
 
 
