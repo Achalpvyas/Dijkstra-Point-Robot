@@ -2,9 +2,6 @@ import pygame
 import numpy as np
 from dijkstra_point import *
 
-
-
-
 #################################
 #  Board parameters
 #################################
@@ -17,7 +14,7 @@ green = (0,255,0)
 blue = (0,0,255)
 
 
-res = 3 #resolution of grid
+res = 4 #resolution of grid
 scale = 3 #scale of grid
 
 size_x = math.ceil(300)
@@ -36,7 +33,7 @@ polygonPts[:,1] = (size_y - polygonPts[:,1])
 rhombusPts = np.array([[225,10],[200,25],[225,40],[250,25]])
 rhombusPts[:,1] = (size_y - rhombusPts[:,1])
 
-ellipsePts = np.array([120,80,80,40])
+ellipsePts = np.array([110,80,80,40])
 
 rectPts = np.array([[95,30],[20,30],[20,40],[95,40]])
 rectPts[:,1] = (size_y - rectPts[:,1]) #To be modified
@@ -50,14 +47,14 @@ pygame.display.flip()
 
 
 ##############################################
-#     Explore Nodes
+#          Explore Nodes
 ##############################################
 A = np.array([[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]])
 costIncrement = [1.0,1.0,1.0,1.0,math.sqrt(2),math.sqrt(2),math.sqrt(2),math.sqrt(2)]
 
 s1 = 0
 s2 = 0
-g1 = 50
+g1 = 250
 g2 = 140
 
 nodesExplored = {}
@@ -65,12 +62,11 @@ q = deque()
 startPosition = np.round((np.array([s1,s2]))/res)
 goalPosition = np.round((np.array([g1,g2]))/res)
 
-if(not isSafe(startPosition) and not isSafe(goalPosition)):
+if(not isSafe(startPosition,res) and not isSafe(goalPosition,res)):
     print("Start or goal position must be in a valid workspace")
 
 else:
-    success,solution = generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored)
-
+    success,solution = generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res)
 
     #############################################
     #     Drawing 
@@ -95,7 +91,6 @@ else:
             pygame.draw.rect(gameDisplay,blue,(goalPosition[0]*res*scale,goalPosition[1]*res*scale,res*scale,res*scale))
             pygame.display.flip()
        
-
         # draw solution path
         for i in range(len(solution)-1,-1,-1):
             pt = solution[i]

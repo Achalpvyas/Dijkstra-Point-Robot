@@ -3,17 +3,15 @@ from collections import deque
 import numpy as np
 import math
 
-
 ######################################
-#          Workspace=
+#          Workspace
 ######################################
 def isValidWorkspace(pt,r = 3): #To be modified
-    circle = (pt[0] - math.floor(225/r))**2 + (pt[1]-math.floor(150/r))**2 
-    ellipse = (pt[0] - math.floor(225/r))**2/40**2 + (pt[1]-math.floor(150/r))**2/25**2
-    if(circle <= math.floor(25/r)**2 or ellipse<= 1):
+    circle = (pt[0] - math.floor(225/r))**2 + (pt[1]-math.floor(150/r))**2 - math.floor(25/r)**2
+    ellipse =((pt[0] - math.floor(150/r))/math.floor(40/r))**2 + ((pt[1]-math.floor(100/r))/math.floor(20/r))**2
+    if(circle <= 0 or ellipse<= 1):
         return False
     return True
-
 
 # checks whether next action is near an obstacle or ill defined 
 def isSafe(newState,r=3):
@@ -33,8 +31,6 @@ def printPath(node):
        current = current.parent
     return l
 
-
-
 #generates optimal path for robot
 def generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res=3):
     key = str(startPosition[0]) + str(startPosition[1])
@@ -47,7 +43,11 @@ def generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res=
         if((currentNode.state == goalPosition).all()):
             sol = printPath(currentNode)
             return [True,sol]
-
+        
+        print("=======")
+        print(currentNode.state)
+        print("=======")
+        print("")
         for i in range(8): 
             newState = A[i,:] + currentNode.state 
             s = str(newState[0])+str(newState[1])
@@ -73,9 +73,9 @@ if __name__ == "__main__":
 
     nodesExplored = {}
     q = deque()
-    startPosition = np.array([12,2])
-    goalPosition = np.array([5,5])
-    print(generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored))
+    startPosition = np.array([0,0])
+    goalPosition = np.array([200,140])
+    print(generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,4))
     
 
 
