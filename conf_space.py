@@ -2,9 +2,35 @@ import pygame
 import numpy as np
 from dijkstra_point import *
 
-#################################
-#  Board parameters
-#################################
+
+
+###################################################
+#                  Parameters 
+###################################################
+A = np.array([[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]])
+costIncrement = [1.0,1.0,1.0,1.0,math.sqrt(2),math.sqrt(2),math.sqrt(2),math.sqrt(2)]
+
+print('Enter start location s1')
+s1 = int(input())
+print('Enter start location s2')
+s2 = int(input())
+
+print('Enter start location g1')
+g1 = int(input())
+print('Enter start location g2')
+g2 = int(input())
+
+# s1 = 0
+# s2 = 0
+# g1 = 250
+# g2 = 140
+
+res = 3 #resolution of grid
+scale = 3 #scale of grid
+
+startPosition = np.round((np.array([s1,s2]))/res)
+goalPosition = np.round((np.array([g1,g2]))/res)
+
 pygame.init()
 
 white = (255,255,255)
@@ -13,18 +39,14 @@ red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 
-
-res = 3 #resolution of grid
-scale = 3 #scale of grid
-
 size_x = math.ceil(300)
 size_y = math.ceil(200)
 gameDisplay = pygame.display.set_mode((size_x*scale,size_y*scale))
 
 
-#####################################
-#       Display Obstacles
-#####################################
+############################################################
+#                Display Obstacles
+############################################################
 circlePts = [225,50,25]
 
 polygonPts =  np.array([[20,120],[25,185],[75,185],[100,150],[75,120],[50,150],[20,120]])
@@ -43,27 +65,23 @@ pygame.draw.polygon(gameDisplay,red,scale*polygonPts)
 pygame.draw.polygon(gameDisplay,red,scale*rhombusPts)
 pygame.draw.polygon(gameDisplay,red,scale*rectPts)
 pygame.draw.ellipse(gameDisplay,red,scale*ellipsePts)
-pygame.display.flip()
 
 
-##############################################
-#          Explore Nodes
-##############################################
-A = np.array([[1,0],[0,1],[-1,0],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]])
-costIncrement = [1.0,1.0,1.0,1.0,math.sqrt(2),math.sqrt(2),math.sqrt(2),math.sqrt(2)]
-
-s1 = 0
-s2 = 0
-g1 = 250
-g2 = 140
-
+############################################################
+#          Draw Explored Nodes and solution path
+############################################################
 nodesExplored = {}
 q = deque()
-startPosition = np.round((np.array([s1,s2]))/res)
-goalPosition = np.round((np.array([g1,g2]))/res)
-
-if(not isSafe(startPosition,res) and not isSafe(goalPosition,res)):
-    print("Start or goal position must be in a valid workspace")
+if(not isSafe(startPosition,res) or not isSafe(goalPosition,res)):
+    basicfont = pygame.font.SysFont(None, 48)
+    text = basicfont.render('Start or goal position must be in a valid workspace', True, (255, 0, 0), (255, 255, 255))
+    textrect = text.get_rect()
+    textrect.centerx = gameDisplay.get_rect().centerx
+    textrect.centery = gameDisplay.get_rect().centery
+ 
+    gameDisplay.blit(text, textrect)
+    pygame.display.update()
+    pygame.time.delay(2000)
 
 else:
     success,solution = generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res)
@@ -99,6 +117,6 @@ else:
             pygame.display.flip()
         pygame.time.delay(1000)
         draw = False
-    pygame.quit()
+pygame.quit()
 
 
