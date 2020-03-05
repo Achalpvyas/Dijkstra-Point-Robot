@@ -6,21 +6,21 @@ import math
 ######################################
 #          Workspace
 ######################################
-def isValidWorkspace(pt,r = 3): #To be modified
-    circle = (pt[0] - math.floor(225/r))**2 + (pt[1]-math.floor(50/r))**2 - math.floor(25/r)**2
-    ellipse =((pt[0] - math.floor(150/r))/math.floor(40/r))**2 + ((pt[1]-math.floor(100/r))/math.floor(20/r))**2
+def isValidWorkspace(pt,r = 3,radiusClearance=0): #To be modified
+    circle = (pt[0] - math.floor(225/r))**2 + (pt[1]-math.floor(50/r))**2 - math.floor((25+radiusClearance)/r)**2
+    ellipse =((pt[0] - math.floor(150/r))/math.floor((40+radiusClearance)/r))**2 + ((pt[1]-math.floor(100/r))/math.floor((20+radiusClearance)/r))**2
     if(circle <= 0 or ellipse<= 1):
         return False
     return True
 
 # checks whether next action is near an obstacle or ill defined 
-def isSafe(newState,r=3):
+def isSafe(newState,r=3,radiusClearance = 0):
     col = math.floor(300/r)
     row = math.floor(200/r)
 
     if(newState[0]< 0 or newState[0]>col or newState[1]<0 or newState[1]>row):
         return False
-    return isValidWorkspace(newState,r)
+    return isValidWorkspace(newState,r,radiusClearance)
 
 #prints solution path 
 def printPath(node):
@@ -32,7 +32,7 @@ def printPath(node):
     return l
 
 #generates optimal path for robot
-def generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res=3):
+def generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res=3,radiusClearance=0):
     key = str(startPosition[0]) + str(startPosition[1])
     root = Node(startPosition,0.0,None)
     nodesExplored[key] = root
@@ -53,7 +53,7 @@ def generatePath(q,A,startPosition,goalPosition,costIncrement,nodesExplored,res=
             s = str(newState[0])+str(newState[1])
 
             if(s not in nodesExplored):
-                if(isSafe(newState,res)):
+                if(isSafe(newState,res,radiusClearance)):
                     newCost = currentNode.cost + costIncrement[i]
                     newNode = Node(newState,newCost,currentNode)
                     nodesExplored[s] = newNode
