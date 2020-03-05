@@ -18,7 +18,7 @@ a safety distance, a measure of how far a robot can be close to an obstacle with
 
 ![](./Data/pointvsrigid.png)
 <p align="center">
-  <img width="460" height="300" src="./Data/clearance.png">
+  <img width="300" height="300" src="./Data/clearance.png">
 </p>
 
 
