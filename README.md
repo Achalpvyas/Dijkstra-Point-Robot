@@ -17,3 +17,13 @@ A point robot is a theoretical construct and has no dimensions. To somewhat acco
 a safety distance, a measure of how far a robot can be close to an obstacle without compromising its safety.
 
 ![](./Data/pointvsrigid.png)
+![](./Data/clearance.png)
+
+### Run the code
+Enter the following to run the code.
+
+```
+python3 main.py
+```
+Follow the instructions after running main.py to get the desired output. NB. Enter 1 for point robot and 2 for rigid robot
+
