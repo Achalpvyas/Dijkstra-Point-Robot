@@ -19,6 +19,12 @@ a safety distance, a measure of how far a robot can be close to an obstacle with
 ![](./Data/pointvsrigid.png)
 ![](./Data/clearance.png)
 
+
+### Dependencies
+python3
+pygame
+numpy
+
 ### Run the code
 Enter the following to run the code.
 
