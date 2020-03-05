@@ -17,7 +17,10 @@ A point robot is a theoretical construct and has no dimensions. To somewhat acco
 a safety distance, a measure of how far a robot can be close to an obstacle without compromising its safety.
 
 ![](./Data/pointvsrigid.png)
-![](./Data/clearance.png)
+<p align="center">
+  <img width="460" height="300" src="./Data/clearance.png">
+</p>
+
 
 
 ### Dependencies
