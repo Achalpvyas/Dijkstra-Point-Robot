@@ -27,3 +27,8 @@ python3 main.py
 ```
 Follow the instructions after running main.py to get the desired output. NB. Enter 1 for point robot and 2 for rigid robot
 
+
+### Output
+
+
+
