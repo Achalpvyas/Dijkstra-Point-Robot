@@ -23,10 +23,10 @@ a safety distance, a measure of how far a robot can be close to an obstacle with
 
 
 
-### Dependencies
-python3
-pygame
-numpy
+### Dependencies and Installation
+python3 
+pygame (pip install pygame)  
+numpy  (pip install numpy)
 
 ### Run the code
 Enter the following to run the code.
@@ -36,8 +36,10 @@ python3 main.py
 ```
 Follow the instructions after running main.py to get the desired output. NB. Enter 1 for point robot and 2 for rigid robot
 
+NB Running time from start position(5,5) to (295,195) takes less than a minute
 
 ### Output
+
 
 
 

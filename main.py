@@ -26,12 +26,13 @@ if(robotType == 2):
 print('Enter start location s1')
 s1 = int(input())
 print('Enter start location s2')
-s2 = int(input())
+s2 = 200-int(input())
 
-print('Enter start location g1')
+print('Enter goal location g1')
 g1 = int(input())
-print('Enter start location g2')
-g2 = int(input())
+print('Enter goal location g2')
+g2 = 200-int(input())
+
 
 # s1 = 0
 # s2 = 0
