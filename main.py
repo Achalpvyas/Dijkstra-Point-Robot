@@ -86,7 +86,7 @@ nodesExplored = {}
 # q = PriorityQueue()
 q = []
 
-if(not isSafe(startPosition,res,0) or not isSafe(goalPosition,res,0)):
+if(not isSafe(startPosition,res,clearance+radius) or not isSafe(goalPosition,res,clearance+radius)):
     basicfont = pygame.font.SysFont(None, 48)
     text = basicfont.render('Start or goal position must be in a valid workspace', True, (255, 0, 0), (255, 255, 255))
     textrect = text.get_rect()
