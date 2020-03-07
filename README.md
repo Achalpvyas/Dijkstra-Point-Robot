@@ -41,5 +41,6 @@ NB Running time from start position(5,5) to (295,195) takes less than a minute
 ### Output
 
 
+![](./Data/output.gif)
 
 
